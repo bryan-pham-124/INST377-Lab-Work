@@ -1,1 +1,153 @@
 
+body {
+    font-family: ‘Segoe UI’, Candara, ‘Bitstream Vera Sans’, ‘DejaVu Sans’, ‘Bitsream Vera Sans’, ‘Trebuchet MS’, Verdana, ‘Verdana Ref’, sans-serif;
+    margin:0;
+    padding: 0;
+}
+.header {
+    margin: 0;
+    padding: 5px 12px;
+    background-color: rgba(0,139, 139, 1);
+}
+.header h1  {
+    font-size: 15px;
+}
+.blue-banner  {
+    background-color: #5a94d8;
+    color: white;
+    font-size: 13px;
+    padding: 20px 0px;
+}
+
+.blue-banner-container {
+    display: flex;
+    align-items: stretch;
+}
+
+.date {
+    border: 2px solid white;
+    flex: 1;
+}
+
+.right-side {
+    display: flex;
+    margin: 0px;
+    border: 3px solid white;
+}
+
+.right-side-item {
+    text-decoration: none;
+    color: white;
+}
+
+.right-side-item:nth-of-type(1) {
+    margin: 0px 25px;
+}
+
+.light-blue-banner {
+    background-color: #d6e8fe;
+}
+
+.light-blue-banner-container {
+    display: flex;
+    height: 350px;
+}
+
+.light-blue-banner-item {
+    align-self: flex-end;
+    text-decoration: none;
+    color: #3366a5;
+    font-weight: 400;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.light-blue-banner img{
+    align-self: center;
+    width: 80%;
+}
+
+@media only screen and (min-width: 961px) {
+
+    .blue-banner, .light-blue-banner {
+        display: flex;
+        justify-content: center;
+    }
+
+    .blue-banner-container, .light-blue-banner-container  {
+        width: 60vw;
+        max-width: 800px;
+    }
+
+    .light-blue-banner-container {
+        justify-self: center;
+    }
+
+    .light-blue-banner img{
+        align-self: center;
+        width: 40vw;
+        max-width: 500px;
+        margin: 0px 35px
+    }
+}
+ 
+
+.img-container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.img-tile {
+    width: 40%;
+    max-width: 600px;
+}
+
+ 
+@media only screen and (min-width: 961px) {
+
+    .images-section {
+        display: flex;
+        justify-content: center;
+    }
+
+    .img-container {
+        width: 800px;
+    }
+
+    .img-tile {
+        width: 33.33%;
+    }
+
+    #tile-three {
+        order: -1;
+    }
+    #tile-four {
+        order: 1;
+    }
+}
+
+.footer-container{
+    display: flex;
+}
+
+.footer-item {
+    width: 40%;
+    height: 150px;
+    font-weight: bold;
+    background-color: #5a94d8;
+}
+
+#footer-item-2{
+    width: 20%;
+    background-color: #d6e8fe;
+}
+
+@media only screen and (min-width: 961px) {
+    .footer-item {
+        width: 15%;
+    }
+    #footer-item-2{
+        width: 70%;
+    }
+}
