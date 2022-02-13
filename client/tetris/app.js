@@ -1,12 +1,3 @@
-/*
-const lTetromino = 'firstShape';
-const zTetromino = 'secondShape';
-const oTetromino = 'thirdShape';
-const iTetromino = 'fourthShape';
-const tTetromino = 'fifthShape';
-
-//const tetrominoes = [lTetromino, zTetromino, oTetromino, iTetromino, tTetromino];
-*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const grid = document.querySelector('.grid');
@@ -18,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let nextRandom = 0;
   let timerId;
 
-  // The Tetrominoes
+  // Defining the "tetrominos"
   const lTetromino = [
     [1, width + 1, width * 2 + 1, 2],
     [width, width + 1, width + 2, width * 2 + 2],
@@ -104,6 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     draw();
   }
 
+  // move right unless it hits another shape or edge
   function moveRight() {
     undraw();
     const isAtRightEdge = current.some((index) => (currentPosition + index) % width === width - 1);
@@ -165,7 +157,9 @@ document.addEventListener('DOMContentLoaded', () => {
     [1, displayWidth + 1, displayWidth * 2 + 1, displayWidth * 3 + 1] //iTetromino
   ]
 
+  // display next shape
   function displayShape() {
+
     // remove any trace of shape from the grid
     displaySquares.forEach((square) => {
       square.classList.remove('tetromino');
@@ -177,7 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  
+ // start and pause button
  startBtn.addEventListener('click', () => {
     if(timerId){
         clearInterval(timerId);
@@ -191,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
  })
  
 
+ // increment score counter after getting a full row
  function addScore() {
   for (let i = 0; i < 199; i += width){
      const row = [i , i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8, i + 9];
