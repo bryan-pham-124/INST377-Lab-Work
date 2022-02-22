@@ -8,19 +8,20 @@ const nextBtn = document.querySelector("#next-tile");
 function moveTile(tileDirection)  {
 
     const currentTile = allTiles[currentTileIndex];
-
+    console.log(currentTile)
     currentTile.classList.remove('visible-tile');
     currentTile.classList.add('invisible-tile');
 
     if(tileDirection === 'forward') {
         currentTileIndex++;
         currentTileIndex = currentTileIndex > allTiles.length - 1 ? 0: currentTileIndex;
-    } else {
+    } else if(tileDirection === 'prev') {
         currentTileIndex--;
         currentTileIndex = currentTileIndex < 0 ? allTiles.length - 1: currentTileIndex;
     }
-
+    console.log(currentTileIndex)
     const nextTile = allTiles[currentTileIndex];
+    console.log(nextTile)
     nextTile.classList.remove('invisible-tile');
     nextTile.classList.add('visible-tile');
 
