@@ -3,7 +3,7 @@
 let listContainer = document.querySelector('#resto-list')
 
  
-function dataHandler(inputArray, replaceContent){
+function dataHandler(inputArray){
   
   let restaurantList = Array.from(new Array(15), () => inputArray[Math.floor(Math.random() * 1000)])
 
