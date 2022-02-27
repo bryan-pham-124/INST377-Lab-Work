@@ -157,8 +157,6 @@ document.addEventListener('DOMContentLoaded', () =>{
             } else {
                 moveRight()
             }
-            doodlerLeftSpace -= 5
-            doodler.style.left = doodlerLeftSpace + 'px'
         }, 20)
     }
 
@@ -166,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     function moveRight(){
         if(isGoingLeft){
             clearInterval(leftTimerId)
-            isGoingRight = false
+            isGoingLeft = false
         }
         isGoingRight = true
         rightTimerId = setInterval(function(){
