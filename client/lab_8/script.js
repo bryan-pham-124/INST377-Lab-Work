@@ -6,13 +6,16 @@ let categoryInput = document.querySelector('.category-input');
 
 listContainer.innerHTML = '<li class = "list-header">Restaurant List</li>';
 
+ 
+let  map = L.map('map', {
+  center: [38.9897, -76.9378],
+  zoom: 12
+});
 
 
 function initMap(){
     // according to google, College Park's coordinates are 38.9897, -76.9378
-    let map = L.map('map').setView([38.9897, -76.9378], 13);
-
-
+    
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -26,6 +29,46 @@ function initMap(){
 }
 
 initMap();
+
+// from given js hints document
+function removeLatLonMarkers(){
+  map.eachLayer((layer) => {
+    if (layer instanceof L.Marker) {
+      layer.remove();
+    }
+  });
+}
+
+function addMarkers(inputArray, inputValue, inputField){
+  
+   //filter through array to find matching entries and get first 5
+   inputArray = inputArray.filter(restr => restr[inputField].toLowerCase().includes(inputValue.toLowerCase()));
+   inputArray = inputArray.filter(restr => restr.hasOwnProperty('geocoded_column_1'))
+
+   if(inputArray.length > 5){
+     inputArray = inputArray.slice(0, 5)
+   }
+
+   inputArray.map(elm => {    
+ 
+     try {
+       let restr_coords = elm['geocoded_column_1']['coordinates'];
+       L.marker([restr_coords[1], restr_coords[0]]).addTo(map);
+     } catch(e) {
+        console.log("Restaurant coords not found")
+     }
+    
+   })
+
+  // Pan to first result
+   try {
+      let firstRestr = inputArray[0]['geocoded_column_1']['coordinates'] 
+      map.panTo([firstRestr[1], firstRestr[0]]); 
+   } catch(e){
+      console.log('Location not found')
+   }
+
+}
 
 
 function dataHandler(inputArray){
@@ -81,6 +124,7 @@ async function mainEvent() { // the async keyword means we can make API requests
 
       submitButton.style.setProperty('--display-value', 'block');
       let listChildrenCount =  listContainer.children.length;
+
       // event listener for restaurant name input
       restaurantInput.addEventListener('input', (e) => {
         
@@ -89,6 +133,9 @@ async function mainEvent() { // the async keyword means we can make API requests
         } else if(enableFiltering){
           let restrName = e.target.value;
           filteredHtmlInjection(currentArray, restrName, 'name');
+         
+          removeLatLonMarkers();
+          addMarkers(currentArray, restrName, 'name');
         }
       
       })
@@ -99,8 +146,11 @@ async function mainEvent() { // the async keyword means we can make API requests
         if (typeof currentArray === 'undefined'){
           return
         } else if(enableFiltering){
-          let restrName = e.target.value;
+          let restrName = e.target.value.toLowerCase();
           filteredHtmlInjection(currentArray, restrName, 'category');
+
+          removeLatLonMarkers();
+          addMarkers(currentArray, restrName, 'category');
         }
        
       })
